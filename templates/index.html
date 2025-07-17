@@ -4,52 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório de Auditoria de Estoque</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="card">
-        <header class="card-header">
-            <h1>Relatório de Auditoria de Estoque</h1>
-            <p>Use os filtros para gerar um relatório de consistência dos itens.</p>
-        </header>
+    <div class="container mt-5 mb-5">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h4><i class="fas fa-clipboard-check mr-2"></i>Relatório de Auditoria de Estoque</h4>
+                <p class="text-muted">Use os filtros para gerar um relatório de consistência dos itens.</p>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="form-group icon-input">
+                            <label for="filtro-entidade">Entidade (Obrigatório):</label>
+                            <i class="fas fa-building"></i>
+                            <select id="filtro-entidade" class="form-control"><option value="">Carregando...</option></select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group icon-input">
+                            <label for="filtro-almoxarifado">Almoxarifado (Opcional):</label>
+                            <i class="fas fa-warehouse"></i>
+                            <select id="filtro-almoxarifado" class="form-control" disabled><option value="">Selecione uma entidade</option></select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group icon-input">
+                            <label for="filtro-produto">Produto (Opcional):</label>
+                            <i class="fas fa-box-open"></i>
+                            <select id="filtro-produto" class="form-control" disabled><option value="">Selecione uma entidade</option></select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group icon-input">
+                            <label for="filtro-lote">Lote (Opcional):</label>
+                            <i class="fas fa-barcode"></i>
+                            <select id="filtro-lote" class="form-control" disabled><option value="">Selecione uma entidade</option></select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button id="reset-button" class="btn btn-secondary mr-2"><i class="fas fa-sync-alt mr-1"></i>Limpar Consulta</button>
+                        <button id="search-button" class="btn btn-primary" disabled><i class="fas fa-search mr-1"></i>Gerar Relatório</button>
+                    </div>
+                </div>
 
-        <section class="card-body">
-            <div class="filter-panel">
-                <div class="filter-group filter-group-span-2">
-                    <label for="filtro-entidade">Entidade (Obrigatório):</label>
-                    <select id="filtro-entidade"><option value="">Carregando...</option></select>
+                <hr>
+
+                <div id="results-filter-panel" class="row align-items-center mb-3" style="display: none;">
+                    <div class="col-md-8">
+                        <div class="form-group icon-input">
+                           <label for="filtro-texto-resultado">Filtrar resultado por produto:</label>
+                           <i class="fas fa-filter"></i>
+                           <input type="text" id="filtro-texto-resultado" class="form-control" placeholder="Digite o nome do produto...">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group form-check custom-checkbox">
+                            <input type="checkbox" class="form-check-input" id="filtro-diferenca">
+                            <label class="form-check-label" for="filtro-diferenca">Mostrar apenas com diferença</label>
+                        </div>
+                    </div>
                 </div>
-                <div class="filter-group">
-                    <label for="filtro-almoxarifado">Almoxarifado (Opcional):</label>
-                    <select id="filtro-almoxarifado" disabled><option value="">Primeiro, selecione uma entidade</option></select>
-                </div>
-                <div class="filter-group">
-                    <label for="filtro-produto">Produto (Opcional):</label>
-                    <select id="filtro-produto" disabled><option value="">Primeiro, selecione uma entidade</option></select>
-                </div>
-                <div class="filter-group">
-                    <label for="filtro-lote">Lote (Opcional):</label>
-                    <select id="filtro-lote" disabled><option value="">Primeiro, selecione uma entidade</option></select>
-                </div>
-                <div class="filter-group">
-                    <label for="filtro-operacao">Operação (Opcional):</label>
-                    <select id="filtro-operacao" disabled><option value="">Primeiro, selecione uma entidade</option></select>
-                </div>
-                <div class="filter-group-span-2 button-container">
-                    <button id="search-button" disabled>Gerar Relatório</button>
+
+                <div id="results-area" class="table-responsive">
+                    <p class="text-center text-muted">Selecione uma entidade e clique em "Gerar Relatório".</p>
                 </div>
             </div>
-
-            <hr class="results-separator">
-            
-            <div id="results-area" class="results-area">
-                <div class="status-message">Selecione uma entidade e clique em "Gerar Relatório".</div>
-            </div>
-        </section>
+        </div>
     </div>
+    
     <script src="/static/script.js"></script>
 </body>
 </html>
