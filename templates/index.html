@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Movimentações</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="card">
+        <header class="card-header">
+            <h1>Relatório Detalhado de Itens Movimentados</h1>
+            <p>Use os filtros abaixo para gerar um relatório de itens.</p>
+        </header>
+
+        <section class="card-body">
+            <div class="filter-panel">
+                <div class="filter-group filter-group-span-2">
+                    <label for="filtro-entidade">Entidade (Obrigatório):</label>
+                    <select id="filtro-entidade"><option value="">Carregando...</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="filtro-almoxarifado">Almoxarifado (Opcional):</label>
+                    <select id="filtro-almoxarifado" disabled><option value="">Selecione uma entidade</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="filtro-produto">Produto (Opcional):</label>
+                    <select id="filtro-produto" disabled><option value="">Selecione uma entidade</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="filtro-lote">Lote (Opcional):</label>
+                    <select id="filtro-lote" disabled><option value="">Selecione uma entidade</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="filtro-operacao">Operação (Opcional):</label>
+                    <select id="filtro-operacao" disabled><option value="">Selecione uma entidade</option></select>
+                </div>
+                <div class="filter-group-span-2 button-container">
+                    <button id="search-button" disabled>Gerar Relatório</button>
+                </div>
+            </div>
+
+            <hr class="results-separator">
+            
+            <div id="results-area" class="results-area">
+                <div class="status-message">Selecione uma entidade e clique em "Gerar Relatório".</div>
+            </div>
+        </section>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
