@@ -50,9 +50,9 @@ def get_detailed_items_report_by_filter(
     query_mov_ids = db.query(models.MovimentacaoGeral.id)
     almoxarifados_ids = [id_tuple[0] for id_tuple in db.query(models.Almoxarifado.id).filter(models.Almoxarifado.fk_entidade == entidade_id).all()]
     if not almoxarifados_ids: return []
-    query_mov_ids = query_mov_ids.filter(or_(models.MovimentacaoGeral.fk_almoxarifado_origem.in_(almoxarifados_ids), models.MovimentacaoGeral.fk_almoxarifado_destino.in_(almoxarifados_ids)))
+    query_mov_ids = query_mov_ids.filter(or_(models.MovimentacaoGeral.fk_almoxarifado_origem.in_(almoxarifados_ids), models.MovimentacaoGeral.fk_almoxarifado_origem.in_(almoxarifados_ids)))
 
-    if almoxarifado_id: query_mov_ids = query_mov_ids.filter(or_(models.MovimentacaoGeral.fk_almoxarifado_origem == almoxarifado_id, models.MovimentacaoGeral.fk_almoxarifado_destino == almoxarifado_id))
+    if almoxarifado_id: query_mov_ids = query_mov_ids.filter(or_(models.MovimentacaoGeral.fk_almoxarifado_origem == almoxarifado_id, models.MovimentacaoGeral.fk_almoxarifado_origem == almoxarifado_id))
     if operacao_id: query_mov_ids = query_mov_ids.filter(models.MovimentacaoGeral.fk_operacao == operacao_id)
     if produto_id or lote_id:
         query_mov_ids = query_mov_ids.join(models.ItemMovimentacao)
@@ -83,11 +83,11 @@ def get_detailed_items_report_by_filter(
     # Parte 3: Processar cada item e fazer a auditoria
     relatorio_final = []
     for item, prod_codigo, prod_desc, lote_num, op_tipo, mov in itens_base:
-        almox_afetado_id = mov.fk_almoxarifado_destino if op_tipo == 0 else mov.fk_almoxarifado_origem
+        almox_afetado_id = mov.fk_almoxarifado_origem if op_tipo == 0 else mov.fk_almoxarifado_origem
         if not almox_afetado_id: continue
 
         # Calcula o total de entradas (tipo 0)
-        total_entradas = db.query(func.sum(models.ItemMovimentacao.quantidade)).join(models.MovimentacaoGeral).join(models.Operacao).filter(models.ItemMovimentacao.fk_produto == item.fk_produto, models.ItemMovimentacao.fk_lote == item.fk_lote, models.MovimentacaoGeral.fk_almoxarifado_destino == almox_afetado_id, models.Operacao.tipo == 0).scalar() or Decimal(0)
+        total_entradas = db.query(func.sum(models.ItemMovimentacao.quantidade)).join(models.MovimentacaoGeral).join(models.Operacao).filter(models.ItemMovimentacao.fk_produto == item.fk_produto, models.ItemMovimentacao.fk_lote == item.fk_lote, models.MovimentacaoGeral.fk_almoxarifado_origem == almox_afetado_id, models.Operacao.tipo == 0).scalar() or Decimal(0)
         # Calcula o total de saídas (tipo 1)
         total_saidas = db.query(func.sum(models.ItemMovimentacao.quantidade)).join(models.MovimentacaoGeral).join(models.Operacao).filter(models.ItemMovimentacao.fk_produto == item.fk_produto, models.ItemMovimentacao.fk_lote == item.fk_lote, models.MovimentacaoGeral.fk_almoxarifado_origem == almox_afetado_id, models.Operacao.tipo == 1).scalar() or Decimal(0)
         saldo_calculado = total_entradas - total_saidas
@@ -137,7 +137,7 @@ def listar_produtos_movimentados_por_entidade(entidade_id: int, db: Session = De
         .join(models.MovimentacaoGeral, models.ItemMovimentacao.fk_movimentacao_geral == models.MovimentacaoGeral.id)
         .filter(or_(
             models.MovimentacaoGeral.fk_almoxarifado_origem.in_(almoxarifados_ids),
-            models.MovimentacaoGeral.fk_almoxarifado_destino.in_(almoxarifados_ids)
+            models.MovimentacaoGeral.fk_almoxarifado_origem.in_(almoxarifados_ids)
         )).order_by(models.Produto.descricao).all()
     )
     return produtos
