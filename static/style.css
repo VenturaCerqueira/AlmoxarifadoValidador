@@ -1,163 +1,68 @@
-/* --- Reset e Estilos Gerais --- */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
 body {
     font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding: 2rem;
     min-height: 100vh;
     background-color: #eef2f5;
     color: #333;
 }
-
-/* --- Card Principal --- */
 .card {
-    width: 90%;
-    max-width: 900px;
+    width: 95%;
+    max-width: 1200px;
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
-
 .card-header {
     background-color: #4a69bd;
     color: white;
     padding: 24px 32px;
 }
-
 .card-header h1 {
     font-size: 1.75rem;
     margin-bottom: 4px;
 }
-
 .card-header p {
     font-size: 1rem;
     opacity: 0.9;
 }
-
 .card-body {
     padding: 32px;
 }
-
-/* --- Formulário de Busca --- */
-.search-form {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 24px;
-}
-
-.search-form input {
-    flex-grow: 1;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    padding: 12px 16px;
-    font-size: 1rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.search-form input:focus {
-    outline: none;
-    border-color: #4a69bd;
-    box-shadow: 0 0 0 3px rgba(74, 105, 189, 0.2);
-}
-
-.search-form button {
-    background-color: #4a69bd;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.search-form button:hover {
-    background-color: #3b539a;
-}
-
-/* --- Área de Resultados e Tabela --- */
-.results-area {
-    margin-top: 24px;
-}
-
-.results-area table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.results-area th, .results-area td {
-    padding: 14px;
-    text-align: left;
-    border-bottom: 1px solid #dee2e6;
-}
-
-.results-area th {
-    font-weight: 700;
-    background-color: #f8f9fa;
-}
-
-.results-area tbody tr:hover {
-    background-color: #f1f3f5;
-}
-
-.status-message {
-    padding: 20px;
-    text-align: center;
-    color: #6c757d;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-}
-
-.error-message {
-    color: #d93025;
-    font-weight: 500;
-}
-
-/* Em static/style.css */
-
-/* --- Painel de Filtros com Grid --- */
 .filter-panel {
-    background-color: #f8f9fa;
-    padding: 24px;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    margin-bottom: 24px;
-
-    /* A mágica começa aqui: */
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Cria duas colunas de largura igual */
-    gap: 20px; /* Espaçamento entre os filtros */
-    align-items: end; /* Alinha os itens na base */
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: end;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
 }
-
 .filter-panel h3 {
-    grid-column: span 2; /* Faz o título ocupar as duas colunas */
+    grid-column: span 2;
     margin-top: 0;
     margin-bottom: 10px;
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
 }
-
 .filter-group {
     display: flex;
     flex-direction: column;
 }
-
 .filter-group label {
     margin-bottom: 8px;
     font-weight: 500;
     font-size: 0.9rem;
     color: #495057;
 }
-
 .filter-group select {
     width: 100%;
     padding: 10px;
@@ -166,22 +71,17 @@ body {
     border-radius: 4px;
     background-color: #fff;
 }
-
 .filter-group select:disabled {
     background-color: #e9ecef;
     cursor: not-allowed;
 }
-
-/* Regra para fazer um item ocupar as 2 colunas */
 .filter-group-span-2 {
     grid-column: span 2;
 }
-
 .button-container {
     display: flex;
-    justify-content: flex-end; /* Alinha o botão à direita */
+    justify-content: flex-end;
 }
-
 #search-button {
     padding: 12px 30px;
     font-size: 1rem;
@@ -193,30 +93,69 @@ body {
     border-radius: 4px;
     transition: background-color 0.2s;
 }
-
 #search-button:hover:not(:disabled) {
     background-color: #0056b3;
 }
-
 #search-button:disabled {
     background-color: #6c757d;
     cursor: not-allowed;
 }
-
-/* ✨ Bônus: Deixando o layout responsivo para celulares */
+hr.results-separator {
+    border: none;
+    border-top: 1px solid #dee2e6;
+    margin: 32px 0;
+}
+.results-area table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+.results-area th, .results-area td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+.results-area th {
+    background-color: #f8f9fa;
+    font-weight: 700;
+}
+.results-area tbody tr:hover {
+    background-color: #f1f3f5;
+}
+.status-message {
+    padding: 20px;
+    text-align: center;
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+.error-message {
+    color: #d93025;
+    font-weight: 500;
+}
+.diferenca-col {
+    font-weight: bold;
+}
+tr.diff-ok td.diferenca-col {
+    color: #28a745;
+}
+tr.diff-error {
+    background-color: #fff3f3;
+}
+tr.diff-error td.diferenca-col {
+    color: #dc3545;
+}
 @media (max-width: 768px) {
     .filter-panel {
-        grid-template-columns: 1fr; /* Em telas pequenas, volta para uma coluna */
+        grid-template-columns: 1fr;
     }
-
     .filter-group-span-2 {
-        grid-column: span 1; /* Em telas pequenas, todos ocupam uma coluna */
+        grid-column: span 1;
     }
-
     .button-container {
-        justify-content: stretch; /* O botão ocupa a largura toda */
+        justify-content: stretch;
     }
-
     #search-button {
         width: 100%;
     }

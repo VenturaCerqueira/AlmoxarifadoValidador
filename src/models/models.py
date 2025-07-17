@@ -4,7 +4,6 @@ from sqlalchemy import (
     String, 
     Boolean, 
     Text, 
-    Float, 
     Numeric, 
     ForeignKey,
     DateTime,
@@ -134,10 +133,12 @@ class Lote(Base):
     entidade = relationship("Entidade", back_populates="lotes")
     itens_movimentados = relationship("ItemMovimentacao", back_populates="lote")
 
-# 8. Modelo Estoque (para o saldo atual)
-class Estoque(Base):
-    __tablename__ = "estoque"
+# 8. Modelo ItemAlmoxarifado (para o saldo atual)
+class ItemAlmoxarifado(Base):
+    __tablename__ = "item_almoxarifado"
     id = Column(Integer, primary_key=True)
-    fk_produto_id = Column(Integer, ForeignKey("produto.id"), nullable=False)
-    fk_almoxarifado_id = Column(Integer, ForeignKey("almoxarifado.id"), nullable=False)
+    fk_produto = Column(Integer, ForeignKey("produto.id"), nullable=False)
+    fk_lote = Column(Integer, ForeignKey("lote.id"))
+    fk_almoxarifado = Column(Integer, ForeignKey("almoxarifado.id"), nullable=False)
     quantidade = Column(Numeric(10, 3))
+    valor_medio = Column(Numeric(10, 3))

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório de Movimentações</title>
+    <title>Relatório de Auditoria de Estoque</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -12,8 +12,8 @@
 <body>
     <div class="card">
         <header class="card-header">
-            <h1>Relatório Detalhado de Itens Movimentados</h1>
-            <p>Use os filtros abaixo para gerar um relatório de itens.</p>
+            <h1>Relatório de Auditoria de Estoque</h1>
+            <p>Use os filtros para gerar um relatório de consistência dos itens.</p>
         </header>
 
         <section class="card-body">
@@ -24,19 +24,19 @@
                 </div>
                 <div class="filter-group">
                     <label for="filtro-almoxarifado">Almoxarifado (Opcional):</label>
-                    <select id="filtro-almoxarifado" disabled><option value="">Selecione uma entidade</option></select>
+                    <select id="filtro-almoxarifado" disabled><option value="">Primeiro, selecione uma entidade</option></select>
                 </div>
                 <div class="filter-group">
                     <label for="filtro-produto">Produto (Opcional):</label>
-                    <select id="filtro-produto" disabled><option value="">Selecione uma entidade</option></select>
+                    <select id="filtro-produto" disabled><option value="">Primeiro, selecione uma entidade</option></select>
                 </div>
                 <div class="filter-group">
                     <label for="filtro-lote">Lote (Opcional):</label>
-                    <select id="filtro-lote" disabled><option value="">Selecione uma entidade</option></select>
+                    <select id="filtro-lote" disabled><option value="">Primeiro, selecione uma entidade</option></select>
                 </div>
                 <div class="filter-group">
                     <label for="filtro-operacao">Operação (Opcional):</label>
-                    <select id="filtro-operacao" disabled><option value="">Selecione uma entidade</option></select>
+                    <select id="filtro-operacao" disabled><option value="">Primeiro, selecione uma entidade</option></select>
                 </div>
                 <div class="filter-group-span-2 button-container">
                     <button id="search-button" disabled>Gerar Relatório</button>
